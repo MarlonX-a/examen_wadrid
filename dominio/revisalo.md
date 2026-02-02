@@ -1,1 +1,0 @@
-si es como el examen del primer parcial, aquí van las entidades con los servicios que luego vas a reutilizar en el rest

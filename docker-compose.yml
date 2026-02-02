@@ -50,7 +50,21 @@ services:
     env_file:
       - ./microservicio/.env
     ports:
-      - "3003:3003"
+      - "3002:3002"
+    restart: unless-stopped
+    networks:
+      - backend
+
+  auditoria-ms:
+    build:
+      context: ./auditoria-ms
+      dockerfile: Dockerfile
+    container_name: auditoria_ms
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    env_file:
+      - ./auditoria-ms/.env
     restart: unless-stopped
     networks:
       - backend
