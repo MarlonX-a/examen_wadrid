@@ -4,32 +4,35 @@ import { RecupMesa } from './recup-mesa.entity';
 
 @Entity('recup_pedido')
 export class RecupPedido {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'recup_idpedido' })
   id: number;
 
-  @Column()
+  @Column({ name: 'recup_numero', nullable: true })
+  numero: string;
+
+  @Column({ name: 'recup_descripcion' })
   descripcion: string;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column('real', { name: 'recup_total' })
   total: number;
 
-  @Column({ default: 'pendiente' })
+  @Column({ name: 'recup_estado', default: 'RECIBIDO' })
   estado: string;
 
-  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
-  fechaCreacion: Date;
+  @Column({ name: 'recup_fecha', type: 'datetime', default: () => "CURRENT_TIMESTAMP" })
+  fecha: Date;
 
   @ManyToOne(() => RecupCliente, (cliente) => cliente.pedidos, { eager: true })
-  @JoinColumn({ name: 'clienteId' })
+  @JoinColumn({ name: 'recup_clienteId' })
   cliente: RecupCliente;
 
-  @Column()
+  @Column({ name: 'recup_clienteId' })
   clienteId: number;
 
   @ManyToOne(() => RecupMesa, (mesa) => mesa.pedidos, { eager: true })
-  @JoinColumn({ name: 'mesaId' })
+  @JoinColumn({ name: 'recup_mesaId' })
   mesa: RecupMesa;
 
-  @Column()
+  @Column({ name: 'recup_mesaId' })
   mesaId: number;
 }
